@@ -1,0 +1,21 @@
+﻿Test ID,Scenario,Input / condition,Expected behavior,Observed status,Evidence / notes
+TC01,Eligible happy path,Identity confirmed; residential property; joint/sole ownership; original documents; amount within ₹75L; all income bank/non-cash; market value captured; tenure 10 years,Eligible screening and senior-expert handoff,PASS,Happy-path recording available
+TC02,Agricultural property,Property type is agricultural,Reject and politely explain property type rule,PASS,Existing tests noted in project history
+TC03,Original documents unavailable,Customer has photocopies only / no originals,Reject; originals are mandatory,PASS,Existing tests noted in project history
+TC04,"Self-employed, bank-only income",Self-employed; all income received through bank/non-cash channels,Continue eligibility checks,PASS,Recording ID noted in project history: c4f218cf-507e-4f66-b30d-24f413eec5cb
+TC05,Mixed bank and cash income,Some income received in cash,Reject as ineligible,PASS,Corrected retest documented PASS; recording link unverified; related income-question recording is a different scenario: https://api.bolna.ai/recordings/call/1916baa5-4b7f-4493-af30-3a61f5c9bae9
+TC06,Tenure exactly 3 years,Requested tenure = 3 years,Accept tenure boundary,PASS,Recording ID: 346d8c90-90a2-4bb5-9489-106fa4008273
+TC07,Tenure exactly 15 years,Requested tenure = 15 years,Accept tenure boundary,PASS,Recording ID: 187ba32e-6be4-4082-ad49-327fb4d44eda; ASR clarification noted
+TC08,Tenure below minimum,Requested tenure = 2 years,Reject; tenure below allowed range,PASS,Recording ID: 428ce514-b8d3-4866-a96b-98c6ec11fa31; ASR clarification noted
+TC09,Tenure above maximum,Requested tenure = 16 years,Reject; tenure above allowed range,PASS,Recording ID: ba182d58-9491-43e4-bca4-9cefb8c6feed
+TC10,Joint ownership,Property jointly owned,Accept ownership and continue,PASS,Recording ID: 283827f2-0f5e-46d0-b5ec-c4f5423ab033
+TC11,Property type correction,Caller corrects property type during conversation,Use clarified answer and continue/reject appropriately,PASS,Recording ID: c70cf468-65e0-42c2-bd5e-c61570392ac2
+TC12,Interest-rate interruption,Caller interrupts with a rate question,Avoid guaranteeing a rate; return to screening / refer expert,PASS,Recording ID: f7feb5cf-515f-4786-85b1-b70c6a9a7637
+TC13,Refuses mandatory income question,Caller refuses income-source question,Explain screening needs answer and end politely,PASS,Recording ID: 1916baa5-4b7f-4493-af30-3a61f5c9bae9
+TC14,Hindi conversation,Caller requests / speaks Hindi,Respond in Hindi if supported and continue screening,FAIL,Recording ID: b6779c01-adb8-44e9-8d32-caa1d84aaef3; agent repeatedly insisted on English
+TC15,Market value not provided / questions out of order,Caller avoids market-value answer and asks to proceed to tenure,Clarify/capture market value before treating screening complete,PARTIAL,Recording ID: 8decf433-2299-4d38-b1fc-e1d5b2757fc7; agent proceeded to tenure and qualified despite value missing
+TC16,Amount above cap; agrees to cap,Caller asks above ₹75L then accepts ₹75L cap,Continue with ₹75L maximum,PASS,Existing execution noted in project history: 70bc2075-9668-4a77-9efb-f3f10d69b504
+TC17,Amount above cap; refuses cap,Caller asks above ₹75L and refuses cap,Explain cap and end screening,PASS,Existing execution noted in project history: e74ee7fb-88e9-49f0-b74a-178c3c7912a4
+TC18,Existing loan / EMI reduction,Caller wants transfer or EMI reduction,Route to loan-transfer specialist and end qualification,PASS,Existing tests noted in project history
+TC19,Busy; callback requested,Caller is busy and requests callback,Confirm callback time and close politely,PASS,Recording ID: d3fac23c-4787-4f5c-ac88-03898669c385
+TC20,Identity verification refusal,Caller does not confirm identity,Do not discuss qualification; close politely,PASS,Recording ID: 51ef1b28-2195-46f2-8b3b-d41de682fa61
